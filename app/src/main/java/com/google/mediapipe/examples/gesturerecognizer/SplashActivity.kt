@@ -1,7 +1,10 @@
 package com.google.mediapipe.examples.gesturerecognizer
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import com.google.mediapipe.examples.gesturerecognizer.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -10,5 +13,15 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.apply {
+            lottieAnimationView.setAnimation("Animation Splash.json")
+            lottieAnimationView.loop(true)
+            lottieAnimationView.playAnimation()
+        }
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 5000)
     }
 }
